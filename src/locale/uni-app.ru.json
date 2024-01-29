@@ -1,0 +1,6 @@
+{
+  "common": {
+    "uni.picker.done": "Завершено",
+    "uni.picker.cancel": "Отменить"
+  }
+}
