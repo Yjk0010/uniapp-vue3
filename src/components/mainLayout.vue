@@ -14,6 +14,12 @@
         <image v-else class="icon" src="/static/images/home.png" mode="scaleToFill" />
         <span>{{ t('首页') }}</span>
       </div>
+      <scanCodeS>
+        <!-- <div class="tabBar-item sys" @click="scanCode">
+          <image v-if="props.active === 1" class="icon" src="/static/images/saoyisao.png" mode="scaleToFill" />
+          <image v-else class="icon" src="/static/images/saoyisao.png" mode="scaleToFill" />
+        </div> -->
+      </scanCodeS>
       <div class="tabBar-item" @click="changeTab(1)">
         <image v-if="props.active === 1" class="icon" src="/static/images/mine_active.png" mode="scaleToFill" />
         <image v-else class="icon" src="/static/images/mine.png" mode="scaleToFill" />
@@ -28,16 +34,16 @@ export default {
 }
 </script>
 <script setup lang="ts">
-import { onMounted } from 'vue';
-import { ref } from 'vue'
-import { useI18n } from 'vue-i18n';
+import { ref, onMounted } from 'vue';
+import useLocale from '@/hooks/useLocale'
+import scanCodeS from "./scanCode.vue"
+const { t } = useLocale()
 const props = withDefaults(
   defineProps<{
     active: number
   }>(), {
   active: 0
 })
-const { t } = useI18n()
 const { safeAreaInsets } = uni.getSystemInfoSync()
 const { top, bottom } = safeAreaInsets as UniApp.SafeAreaInsets
 
@@ -56,6 +62,8 @@ const changeTab = (index: number): void => {
 onMounted(() => {
   uni.hideTabBar()
 })
+
+
 </script>
 
 <style lang="scss" scoped>
@@ -69,8 +77,8 @@ onMounted(() => {
     display: flex;
     align-items: center;
     color: #fff;
-    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1);
-    background-color: #3379ff;
+    box-shadow: $uni-shadow-base;
+    background-color: $uni-primary;
     font-size: 36rpx;
 
     .logo {
@@ -91,14 +99,16 @@ onMounted(() => {
     justify-content: space-around;
     color: #666;
     font-size: 24rpx;
-    box-shadow: 0 -2px 4px 0 rgba(0, 0, 0, 0.1);
+    box-shadow: $uni-shadow-base;
     padding: 10rpx;
+    position: relative;
 
     .tabBar-item {
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
+      flex: 1;
 
       .icon {
         height: 48rpx;
@@ -106,7 +116,23 @@ onMounted(() => {
       }
 
       &.active {
-        color: #000;
+        color: $uni-black;
+      }
+
+      &.sys {
+        border-radius: 50%;
+        flex: 0 0 120rpx;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding-bottom: 50rpx;
+        z-index: 2;
+
+        .icon {
+          position: absolute;
+          width: 120rpx;
+          height: 120rpx;
+        }
       }
     }
   }

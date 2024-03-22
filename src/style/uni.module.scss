@@ -1,0 +1,12 @@
+/* 需要放到文件最上面 */
+@import "../uni.scss";
+
+:export {
+  uniPrimary: $uni-primary;
+  uniPrimaryDisable: $uni-primary-disable;
+  uniPrimaryLight: $uni-primary-light;
+  uniSuccess: $uni-success;
+  uniWarning: $uni-warning;
+  uniError: $uni-error;
+  uniInfo: $uni-info;
+}

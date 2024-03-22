@@ -1,5 +1,6 @@
 {
   "common": {
+    "login.title": "Регистрация",
     "uni.picker.done": "Завершено",
     "uni.picker.cancel": "Отменить"
   }

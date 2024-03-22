@@ -1,0 +1,15 @@
+:root {
+  --infoText-c: rgba(0, 0, 0, 0.4);
+}
+
+#app {
+  .uni-picker-container .uni-picker-action.uni-picker-action-confirm {
+    color: $uni-primary;
+  }
+  .uni-fab__circle--rightBottom,
+  .uni-fab--rightBottom {
+    right: 50%;
+    bottom: 3%;
+    transform: translateX(50%);
+  }
+}

@@ -1,19 +1,16 @@
 import { ref } from "vue";
 import { defineStore } from "pinia";
-import { useI18n } from 'vue-i18n';
+
 export const useAppStore = defineStore(
   "app",
   () => {
-    const language = ref(uni.getStorageSync('language') || uni.getLocale());
-    const { locale } = useI18n();
-    const changeLang = (lang: string) => {
-      language.value = lang;
+    const locale = ref(uni.getStorageSync('language') as string || uni.getLocale());
+    const changeLocale = (lang: string) => {
       locale.value = lang;
-      uni.setLocale(lang);
     };
     return {
-      language,
-      changeLang,
+      locale,
+      changeLocale,
     };
   },
   {

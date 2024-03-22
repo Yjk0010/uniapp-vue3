@@ -11,5 +11,6 @@ declare module 'vue' {
     MainLayout: typeof import('./src/components/mainLayout.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
+    ScanCode: typeof import('./src/components/scanCode.vue')['default']
   }
 }

@@ -3,6 +3,7 @@ import i18n from "./lang/i18n";
 import App from "./App.vue";
 import pinia from "./stores/index";
 import '@/api/request'
+import "@/style/var.scss"
 
 
 

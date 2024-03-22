@@ -2,12 +2,19 @@
   <mainLayout :active="0">
     <view class="text-area">
       <text class="title">{{ title }}这就牛逼了111</text>
-      <changeLang></changeLang>
+      <uni-section :title="t('语言')" type="line">
+        <uni-list>
+          <changeLang v-slot="{ locale }">
+            <uni-list-item showArrow :title="t('当前语言')" clickable :rightText="t(`${locale}`)" />
+          </changeLang>
+        </uni-list>
+      </uni-section>
       {{ Api }}
       <button @click="testRequest">
         测试请求
       </button>
       <view>{{ wxpayserver }}</view>
+      <button @click="toLogin">{{ t('登录') }}</button>
     </view>
   </mainLayout>
 </template>
@@ -15,6 +22,9 @@
 <script setup lang="ts">
 import mainLayout from '@/components/mainLayout.vue'
 import changeLang from '@/components/changeLang.vue'
+
+import useLocale from '@/hooks/useLocale'
+const { t } = useLocale()
 
 
 import { ref } from 'vue'
@@ -46,6 +56,12 @@ const testRequest = async () => {
 
 
 
+}
+
+const toLogin = () => {
+  uni.navigateTo({
+    url: "/pages/login/index",
+  })
 }
 
 </script>

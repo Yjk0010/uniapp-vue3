@@ -1,5 +1,6 @@
 {
   "common": {
+    "login.title": "Login",
     "uni.picker.done": "OK",
     "uni.picker.cancel": "Cancel"
   }
