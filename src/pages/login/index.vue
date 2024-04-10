@@ -12,7 +12,7 @@
           <uni-easyinput v-model="formData.code" :placeholder="t('请输入验证码')" :primaryColor="styles.uniPrimary" />
         </uni-forms-item>
       </uni-forms>
-      <button @click="submit()">{{ t("提交") }}</button>
+      <button type="primary" @click="submit()">{{ t("提交") }}</button>
     </div>
     <div class="changeLang">
       <changeLang>

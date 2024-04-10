@@ -7,3 +7,9 @@ declare module '*.vue' {
   export default component
 }
 
+declare namespace JSX {
+  interface IntrinsicElements {
+    button: UniHelper.Button
+  }
+}
+

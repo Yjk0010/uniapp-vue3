@@ -12,4 +12,14 @@
     bottom: 3%;
     transform: translateX(50%);
   }
+  .mt-12 {
+    margin-top: 12rpx;
+  }
+  uni-button[type="primary"] {
+    background-color: $uni-primary;
+    color: $uni-white;
+  }
+  uni-button[disabled][type="primary"] {
+    background-color: $uni-primary-disable;
+  }
 }

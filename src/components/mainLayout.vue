@@ -9,55 +9,44 @@
     </div>
 
     <div class="tabBar" :style="{ paddingBottom: (bottom + 'px') }">
-      <div :class="['tabBar-item', { active: active === 0 }]" @click="changeTab(0)">
-        <image v-if="props.active === 0" class="icon" src="/static/images/home_active.png" mode="scaleToFill" />
-        <image v-else class="icon" src="/static/images/home.png" mode="scaleToFill" />
-        <span>{{ t('首页') }}</span>
-      </div>
-      <scanCodeS>
-        <!-- <div class="tabBar-item sys" @click="scanCode">
-          <image v-if="props.active === 1" class="icon" src="/static/images/saoyisao.png" mode="scaleToFill" />
-          <image v-else class="icon" src="/static/images/saoyisao.png" mode="scaleToFill" />
-        </div> -->
-      </scanCodeS>
-      <div class="tabBar-item" @click="changeTab(1)">
-        <image v-if="props.active === 1" class="icon" src="/static/images/mine_active.png" mode="scaleToFill" />
-        <image v-else class="icon" src="/static/images/mine.png" mode="scaleToFill" />
-        <span>{{ t('我的') }}</span>
+      <div v-for="item in tabs" :key="item.key" :class="['tabBar-item', { active: active === item.index }]"
+        @click="changeTab(item.index)">
+        <image class="icon" :src="active === item.index ? item.activeIcon : item.icon" mode="scaleToFill" />
+        <span>{{ t(`${item.label}`) }}</span>
       </div>
     </div>
+    <scanCodeS></scanCodeS>
   </view>
 </template>
 <script lang="ts">
 export default {
-  name: "mainLayout"
+  name: "mainLayout",
 }
 </script>
+
 <script setup lang="ts">
 import { ref, onMounted } from 'vue';
 import useLocale from '@/hooks/useLocale'
 import scanCodeS from "./scanCode.vue"
 const { t } = useLocale()
-const props = withDefaults(
-  defineProps<{
-    active: number
-  }>(), {
-  active: 0
-})
+const active = ref(0)
+
 const { safeAreaInsets } = uni.getSystemInfoSync()
 const { top, bottom } = safeAreaInsets as UniApp.SafeAreaInsets
 
 
-const routeForm = {
-  0: '/pages/index/index',
-  1: '/pages/mine/index'
-}
+const tabs = [
+  { index: 0, label: "首页", key: "home", icon: "/static/images/home.png", activeIcon: "/static/images/home_active.png" },
+  { index: 1, label: "我的", key: "mine", icon: "/static/images/mine.png", activeIcon: "/static/images/mine_active.png" },
+]
+
 
 const changeTab = (index: number): void => {
-  uni.switchTab({
-    url: routeForm[index as keyof typeof routeForm]
-  })
+  active.value = index
+  const { key } = tabs[index]
+  emits('change', { key, index })
 }
+const emits = defineEmits(['change'])
 
 onMounted(() => {
   uni.hideTabBar()

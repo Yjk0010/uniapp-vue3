@@ -4,3 +4,10 @@ interface IRequestData<T> {
   total?: number,
   data: T
 }
+
+interface IPayMe {
+  create(apiKey: string, options: {
+    testMode: boolean
+  }): Promise<any>
+}
+const PayMe: IPayMe;
